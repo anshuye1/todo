@@ -1,0 +1,47 @@
+@mixin fangxing($size){
+  width:$size;
+  height:$size;
+}
+@mixin center(){
+  position: absolute;
+  top:0;
+  left:0;
+  right: 0;
+  bottom:0;
+  margin:auto;
+}
+@mixin left-right(){
+  position: absolute;
+  left:0;
+  right: 0;
+  margin:0 auto;
+}
+@mixin yuan($size:40px){
+  @include fangxing($size);
+  border-radius: 50%;
+  @content;
+}
+$m-size:1190px;
+@mixin onm{
+  @media screen and (max-width:$m-size){
+    @content;
+  }
+}
+$s-size:206px;
+@mixin ons{
+  @media screen and (max-width:$s-size){
+    @content;
+  }
+}
+
+//////////////////////////////////////响应式缩放布局////////////
+@mixin useRem($design-size){
+  $device-list-size:$design-size, 414px, 411px, 380px, 375px, 360px, 320px;
+  @each $size in $device-list-size {
+    @media screen and (max-width: #{$size}) {
+      html {
+        font-size: 100px*$size/$design-size;
+      }
+    }
+  }
+}
